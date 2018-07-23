@@ -1,7 +1,7 @@
 $(document).ready(function () {
   var timeData = [],
     temperatureData = [],
-    humidityData = [];
+    pressureData = [];
   var data = {
     labels: timeData,
     datasets: [
@@ -18,14 +18,14 @@ $(document).ready(function () {
       },
       {
         fill: false,
-        label: 'Humidity',
-        yAxisID: 'Humidity',
+        label: 'Pressure',
+        yAxisID: 'Pressure (Pa)',
         borderColor: "rgba(24, 120, 240, 1)",
         pointBoarderColor: "rgba(24, 120, 240, 1)",
         backgroundColor: "rgba(24, 120, 240, 0.4)",
         pointHoverBackgroundColor: "rgba(24, 120, 240, 1)",
         pointHoverBorderColor: "rgba(24, 120, 240, 1)",
-        data: humidityData
+        data: PressureData
       }
     ]
   }
@@ -33,7 +33,7 @@ $(document).ready(function () {
   var basicOption = {
     title: {
       display: true,
-      text: 'Temperature & Humidity Real-time Data',
+      text: 'Temperature & Pressure Real-time Data',
       fontSize: 36
     },
     scales: {
@@ -46,10 +46,10 @@ $(document).ready(function () {
         },
         position: 'left',
       }, {
-          id: 'Humidity',
+          id: 'Pressure',
           type: 'linear',
           scaleLabel: {
-            labelString: 'Humidity(%)',
+            labelString: 'Pressure(pa)',
             display: true
           },
           position: 'right'
@@ -87,11 +87,11 @@ $(document).ready(function () {
         temperatureData.shift();
       }
 
-      if (obj.humidity) {
-        humidityData.push(obj.humidity);
+      if (obj.pressure) {
+        pressureData.push(obj.pressure);
       }
-      if (humidityData.length > maxLen) {
-        humidityData.shift();
+      if (pressureData.length > maxLen) {
+        pressureData.shift();
       }
 
       myLineChart.update();
